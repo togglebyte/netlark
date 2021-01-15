@@ -11,6 +11,10 @@ use common::{Rx, Tx};
 
 use crate::loggy;
 
+pub fn channel() -> (Tx, Rx) {
+    mpsc::channel()
+}
+
 pub fn connect(client_tx: Tx) -> Tx {
     let (server_tx, server_rx) = mpsc::channel::<Message>();
 
