@@ -18,7 +18,12 @@ pub use scene::Scene;
 #[macro_export]
 macro_rules! loggy {
     ($($arg:tt)*) => { 
+        use std::fs::OpenOptions;
+        use std::io::Write;
+
         let message = format!("{:?}", $($arg)*);
+        let mut f = OpenOptions::new().write(true).append(true).open("/tmp/loggy.txt").unwrap();
+        f.write_all(message.as_bytes());
     }
 }
 
